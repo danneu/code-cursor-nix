@@ -1,0 +1,47 @@
+name: Test Pull Request
+
+on:
+  pull_request:
+    paths:
+      - "package.nix"
+      - "flake.nix"
+      - "flake.lock"
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Nix cache
+        uses: cachix/cachix-action@v15
+        with:
+          name: nix-community
+          skipPush: true
+
+      - name: Build package
+        run: |
+          nix build .#code-cursor --print-build-logs
+
+      - name: Verify package contents
+        run: |
+          # Verify the binary exists
+          test -f ./result/bin/cursor
+          echo "Binary exists at ./result/bin/cursor"
+
+          # Verify desktop file exists
+          test -f ./result/share/applications/cursor.desktop
+          echo "Desktop file exists"
+
+          # Verify icon exists
+          test -f ./result/share/icons/hicolor/512x512/apps/cursor.png
+          echo "Icon exists"
