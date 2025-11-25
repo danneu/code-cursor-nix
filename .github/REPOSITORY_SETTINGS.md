@@ -1,0 +1,57 @@
+# Repository Settings Configuration
+
+This repository requires specific GitHub settings to enable automated updates.
+
+## Required Settings
+
+### GitHub Actions Permissions
+
+1. Navigate to Settings → Actions → General
+2. Under "Workflow permissions":
+   - Select **"Read and write permissions"**
+   - Check **"Allow GitHub Actions to create and approve pull requests"**
+3. Click Save
+
+These settings allow the `update-cursor.yml` workflow to:
+
+- Modify files in the repository
+- Create pull requests for version updates
+- Update the flake.lock file
+
+### Auto-Merge (Optional)
+
+To enable automatic merging of update PRs:
+
+1. Navigate to Settings → General
+2. Under "Pull Requests":
+   - Check **"Allow auto-merge"**
+3. Click Save
+
+## Cachix Setup
+
+To enable binary caching:
+
+1. Create a cache at https://app.cachix.org/cache
+2. Name it `code-cursor-nix` (or update the workflow files)
+3. Generate an auth token
+4. Add secret `CACHIX_AUTH_TOKEN` in Settings → Secrets and variables → Actions
+
+## Verification
+
+After configuring the settings, you can verify the workflow works by:
+
+```bash
+# Manually trigger the update workflow
+gh workflow run "Update Cursor Version"
+
+# Check the workflow status
+gh run list --workflow="Update Cursor Version"
+```
+
+## Troubleshooting
+
+If you see the error "GitHub Actions is not permitted to create or approve pull requests":
+
+- Ensure the settings above are properly configured
+- The repository must not have branch protection rules that prevent GitHub Actions from creating PRs
+- The workflow uses the built-in `GITHUB_TOKEN` which is automatically provided
