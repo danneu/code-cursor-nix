@@ -12,17 +12,17 @@
 }:
 
 let
-  version = "2.1.34";
-  commit = "609c37304ae83141fd217c4ae638bf532185650f";
+  version = "2.1.36";
+  commit = "9cd7c8b6cebcbccc1242df211dee45a4b6fe15e4";
 
   sources = {
     x86_64-linux = {
       url = "https://downloads.cursor.com/production/${commit}/linux/x64/Cursor-${version}-x86_64.AppImage";
-      hash = "sha256-NPs0P+cnPo3KMdezhAkPR4TwpcvIrSuoX+40NsKyfzA=";
+      hash = "sha256-aaprRB2BAaUCHj7m5aGacCBHisjN2pVZ+Ca3u1ifxBA=";
     };
     aarch64-linux = {
       url = "https://downloads.cursor.com/production/${commit}/linux/arm64/Cursor-${version}-aarch64.AppImage";
-      hash = "sha256-+bh6h/wDCZrfW3TALn96juNtr9Pd7CxwMc80ok3pq48=";
+      hash = "sha256-S2vFYBI6m0zjBJEDbk7gc6/zFiKWyhM73OUm1xsNx6Q=";
     };
   };
 
