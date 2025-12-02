@@ -15,17 +15,17 @@
 let
   inherit (stdenv) hostPlatform;
 
-  version = "2.1.44";
-  commit = "f6a8593b2b7c61c2063c79d5a8fcd248c9db458a";
+  version = "2.1.46";
+  commit = "ab326d0767c02fb9847b342c43ea58275c4b1685";
 
   sources = {
     x86_64-linux = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/linux/x64/Cursor-${version}-x86_64.AppImage";
-      hash = "sha256-JUNkdQX/z5TryDK8aeC1QFADdGLpWbeemqArmnMeXQo=";
+      hash = "sha256-4YCBHefGYDQmh7qbLipCmHkyzHBq95b4NtiOS2Sc22o=";
     };
     aarch64-linux = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/linux/arm64/Cursor-${version}-aarch64.AppImage";
-      hash = "sha256-vZOhoBQmN/nx2cqx6vH4Mw9AAtrxXzVQYATwyL7YPvc=";
+      hash = "sha256-1gplLx8BWvIDYW/XGMokl2twoqoNhXVBBvHQA1++zOg=";
     };
   };
 
