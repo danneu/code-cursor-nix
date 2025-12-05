@@ -18,10 +18,10 @@
           vscode-generic = "${nixpkgs}/pkgs/applications/editors/vscode/generic.nix";
         };
       };
-      # Only support Linux (AppImage doesn't work on Darwin)
       supportedSystems = [
         "x86_64-linux"
         "aarch64-linux"
+        "aarch64-darwin"
       ];
     in
     flake-utils.lib.eachSystem supportedSystems (
