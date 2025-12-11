@@ -61,13 +61,17 @@ update_package_hash() {
   local arch="$1"
   local hash="$2"
 
-  if [ "$arch" = "x64" ]; then
-    # Update x86_64-linux hash
-    sed -i.bak "/x86_64-linux/,/};/s|hash = \"[^\"]*\"|hash = \"$hash\"|" package.nix
-  else
-    # Update aarch64-linux hash
-    sed -i.bak "/aarch64-linux/,/};/s|hash = \"[^\"]*\"|hash = \"$hash\"|" package.nix
-  fi
+  case "$arch" in
+    x64)
+      sed -i.bak "/x86_64-linux/,/};/s|hash = \"[^\"]*\"|hash = \"$hash\"|" package.nix
+      ;;
+    arm64)
+      sed -i.bak "/aarch64-linux/,/};/s|hash = \"[^\"]*\"|hash = \"$hash\"|" package.nix
+      ;;
+    darwin-arm64)
+      sed -i.bak "/aarch64-darwin/,/};/s|hash = \"[^\"]*\"|hash = \"$hash\"|" package.nix
+      ;;
+  esac
 }
 
 cleanup_backup_files() {
@@ -109,6 +113,19 @@ update_to_version() {
   fi
   log_info "aarch64 hash: $arm64_hash"
   update_package_hash "arm64" "$arm64_hash"
+
+  # Fetch and update darwin arm64 hash
+  log_info "Fetching darwin arm64 DMG hash..."
+  local darwin_arm64_url="https://downloads.cursor.com/production/${new_commit}/darwin/arm64/Cursor-darwin-arm64.dmg"
+  local darwin_arm64_hash
+  darwin_arm64_hash=$(fetch_appimage_hash "$darwin_arm64_url")
+  if [ -z "$darwin_arm64_hash" ]; then
+    log_error "Failed to fetch darwin arm64 hash"
+    mv package.nix.bak package.nix
+    exit 1
+  fi
+  log_info "darwin arm64 hash: $darwin_arm64_hash"
+  update_package_hash "darwin-arm64" "$darwin_arm64_hash"
 
   cleanup_backup_files
 
