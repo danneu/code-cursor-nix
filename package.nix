@@ -17,21 +17,21 @@
 let
   inherit (stdenv) hostPlatform;
 
-  version = "2.2.35";
-  commit = "86d7e0c1a66a0a5f7e32cdbaf9b4bfbaf20ddaf2";
+  version = "2.2.36";
+  commit = "55c9bc11e99cedd1fb93fbb7996abf779c58315f";
 
   sources = {
     x86_64-linux = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/linux/x64/Cursor-${version}-x86_64.AppImage";
-      hash = "sha256-Z7OnycxrtXaywMphzBq9hV/sxddEX9oAQYACdFyKie4=";
+      hash = "sha256-t6PJJcTlLVPd3MfJEdMfsbwUMeDBOfAGZiQArGrHzLo=";
     };
     aarch64-linux = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/linux/arm64/Cursor-${version}-aarch64.AppImage";
-      hash = "sha256-O0IVSnd0DkvU6ssXyPYi4qw1muTBgEAaTgV/lIXWCp0=";
+      hash = "sha256-0BjviTzzhGe7uEv5e2zxwdXAcz1bR/jVxpbrmVWqNe0=";
     };
     aarch64-darwin = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/darwin/arm64/Cursor-darwin-arm64.dmg";
-      hash = "sha256-0TroqnpLE6bz92+2gHL3d11G9gmuD0s9msrB8RJM6bs=";
+      hash = "sha256-cRcxtaYw7xUC68WTcN38LKqy5nL4Uf+q15wL1VIOYEY=";
     };
   };
 
