@@ -217,6 +217,14 @@ main() {
     exit 0
   fi
 
+  # Compare versions to prevent downgrades
+  # Sort versions and check if latest is actually newer
+  newer_version=$(printf '%s\n%s\n' "$current_version" "$latest_version" | sort -V | tail -1)
+  if [ "$newer_version" = "$current_version" ]; then
+    log_info "Latest version ($latest_version) is not newer than current ($current_version). Skipping."
+    exit 0
+  fi
+
   if [ "$check_only" = true ]; then
     log_info "Update available: $current_version -> $latest_version"
     exit 1 # Exit with non-zero to indicate update is available
