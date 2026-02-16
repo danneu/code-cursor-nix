@@ -70,7 +70,8 @@ let
   };
 
   # Linux-specific derivation using vscode-generic
-  linuxPackage = callPackage vscode-generic rec {
+  # vscode-generic is a curried function: outer takes deps, inner takes package attrs
+  linuxPackage = (callPackage vscode-generic { }) rec {
     pname = "cursor";
     inherit version;
 
