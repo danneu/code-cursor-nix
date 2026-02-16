@@ -130,7 +130,7 @@ update_to_version() {
   cleanup_backup_files
 
   log_info "Verifying build..."
-  if nix build .#code-cursor --no-link >/dev/null 2>&1; then
+  if nix build .#code-cursor --no-link --print-build-logs 2>&1; then
     log_info "Build successful!"
     return 0
   else
