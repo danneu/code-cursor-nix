@@ -17,21 +17,21 @@
 let
   inherit (stdenv) hostPlatform;
 
-  version = "2.5.25";
-  commit = "7150844152b426ed50d2b68dd6b33b5c5beb73ca";
+  version = "2.5.26";
+  commit = "7d96c2a03bb088ad367615e9da1a3fe20fbbc6ae";
 
   sources = {
     x86_64-linux = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/linux/x64/Cursor-${version}-x86_64.AppImage";
-      hash = "sha256-6ldXKM21FP/ICwowJa6Fi48CR/4MMRNQ0VUv75xOZYE=";
+      hash = "sha256-5dzRSqehpJDBFSFTn0W07H6fKho1oRW/oMEVPjfZaxo=";
     };
     aarch64-linux = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/linux/arm64/Cursor-${version}-aarch64.AppImage";
-      hash = "sha256-dHk3cMBsqk+NoI3y99+hZKprz0AxyH8HO1pClzQ6Tu0=";
+      hash = "sha256-0aGHUabQuYZZIuRz+O0etOi29cfQ7ihSZCSn4IHoiKo=";
     };
     aarch64-darwin = fetchurl {
       url = "https://downloads.cursor.com/production/${commit}/darwin/arm64/Cursor-darwin-arm64.dmg";
-      hash = "sha256-oU1eTvm1ZAFg4KQIEjJf1WxfwtWJV7418ioSr3yMQ+8=";
+      hash = "sha256-/0P9EXloI2RxOMS1/ehN7HlYpwvz+ZFn5HIquLmSq5s=";
     };
   };
 
